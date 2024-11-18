@@ -1,6 +1,13 @@
 CREATE DATABASE hdb;
 USE hdb;
 
+CREATE TABLE Users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password BINARY(60) NOT NULL,  -- For bcrypt hashed passwords
+    role VARCHAR(20) NOT NULL
+);
+
 -- Core tables
 CREATE TABLE Patients (
     Patient_ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -83,13 +90,11 @@ CREATE TABLE Bills (
 CREATE TABLE Patient_Phone_Numbers (
     Patient_ID INT,
     Phone_Number VARCHAR(100),
-    PRIMARY KEY (Patient_ID, Phone_Number),
-    FOREIGN KEY (Patient_ID) REFERENCES Patients(Patient_ID) ON DELETE CASCADE
+    PRIMARY KEY (Patient_ID, Phone_Number)
 );
 
 CREATE TABLE Prescription_Frequencies (
     Prescription_ID INT,
     Frequency VARCHAR(50),
-    PRIMARY KEY (Prescription_ID, Frequency),
-    FOREIGN KEY (Prescription_ID) REFERENCES Prescriptions(Prescription_ID) ON DELETE CASCADE
+    PRIMARY KEY (Prescription_ID, Frequency)
 );
